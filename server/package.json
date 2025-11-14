@@ -1,0 +1,17 @@
+{
+  "name": "week3-402",
+  "version": "1.0.0",
+  "description": "",
+  "license": "ISC",
+  "author": "Suha Oudeh",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon index.js",
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "cors": "^2.8.5"
+  }
+}
+
