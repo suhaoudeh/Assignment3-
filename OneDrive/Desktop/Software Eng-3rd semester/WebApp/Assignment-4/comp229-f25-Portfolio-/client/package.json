@@ -9,4 +9,5 @@
     "lint": "eslint .",
     "preview": "vite preview"
   }
+  
 }
