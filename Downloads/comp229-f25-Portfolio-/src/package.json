@@ -1,0 +1,9 @@
+{
+  "name": "assignment3-src-proxy",
+  "private": true,
+  "version": "1.0.0",
+  "scripts": {
+    "start": "node ../server/server.js",
+    "install": "echo 'No install step for src proxy'"
+  }
+}
