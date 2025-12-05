@@ -7,6 +7,7 @@ import path from 'path';
 import fs from 'fs';
 import { fileURLToPath } from 'url';
 
+
 // __dirname replacement in ES modules
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -26,7 +27,10 @@ const app = express();
 app.use(express.json()); // Middleware to parse JSON bodies
 
 app.use(morgan('dev'));
-app.use(cors());
+app.use(cors({
+  origin: 'http://localhost:3000', // React frontend on port 3000
+  credentials: true
+}));
 
 //Routes
 
@@ -41,6 +45,9 @@ app.use('/api/data', (req, res) => {
 const clientBuildPath = path.join(__dirname, '../client/build');
 const clientDistPath = path.join(__dirname, '../client/dist');
 
+
+
+
 if (fs.existsSync(clientBuildPath)) {
     app.use(express.static(clientBuildPath));
 } else if (fs.existsSync(clientDistPath)) {
@@ -49,7 +56,7 @@ if (fs.existsSync(clientBuildPath)) {
     console.warn('Client build not found. Run `npm --prefix client run build` to generate the static files.');
 }
 
-app.get( (req, res) => {
+app.get('/', (req, res) => {
     const indexPathBuild = path.join(clientBuildPath, 'index.html');
     const indexPathDist = path.join(clientDistPath, 'index.html');
 
@@ -58,8 +65,14 @@ app.get( (req, res) => {
 
     res.status(404).send('Client build not found. Run `npm --prefix client run build`.');
 });
+app.use(express.static(path.join(__dirname, '../client/dist')));
+app.get(/^(?!\/api).*/, (req, res) => {
+    res.sendFile(path.join(__dirname, '../client/dist', 'index.html'));
+});
+
 const PORT = process.env.PORT || 3000;
 
 app.listen(PORT, '0.0.0.0', () => {
     console.log(`Server running at http://localhost:${PORT}/`);
 });
+

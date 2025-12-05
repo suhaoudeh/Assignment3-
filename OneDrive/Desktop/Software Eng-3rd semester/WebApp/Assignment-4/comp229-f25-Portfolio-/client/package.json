@@ -4,10 +4,14 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
+    "install": "cd .. && npm install",
+
     "dev": "vite",
     "build": "vite build",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "start": "cd ../server && npm start",
+    "heroku-postbuild": "npm install && npm run build"
   }
-  
+
 }

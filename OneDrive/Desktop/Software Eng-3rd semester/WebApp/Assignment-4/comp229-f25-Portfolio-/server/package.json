@@ -12,6 +12,8 @@
   },
   "dependencies": {
     "cors": "^2.8.5"
+  },
+  "devDependencies": {
+    "concurrently": "^9.2.1"
   }
 }
-
