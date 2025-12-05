@@ -50,6 +50,9 @@ app.use('/api/data', (req, res) => {
 
 // Serve static files from client/dist
 app.use(express.static(path.join(__dirname, '../client/dist')));
+app.get(/^(?!\/api).*/, (req, res) => {
+    res.sendFile(path.join(__dirname, '../client/dist', 'index.html'));
+});
 
 // SPA fallback - serve index.html for all non-API routes
 app.use((req, res) => {
