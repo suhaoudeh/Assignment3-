@@ -4,6 +4,12 @@ import cors from 'cors';
 import mongoose from "mongoose";
 import dotenv from 'dotenv/config';
 
+import path from 'path';
+import { fileURLToPath } from 'url';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
 // Connect to MongoDB
 mongoose.connect(process.env.MONGODB_URI);
 const connection = mongoose.connection;
@@ -31,6 +37,10 @@ app.use('/api/data', (req, res) => {
     res.json({ message: 'Hello from the API! Again' });
 });
 
+app.use(express.static(path.join(__dirname, '../client/dist')));
+app.get(/^(?!\/api).*/, (req, res) => {
+    res.sendFile(path.join(__dirname, '../client/dist', 'index.html'));
+});
 
 const PORT = process.env.PORT || 3000;
 
