@@ -56,6 +56,7 @@ export default function Home() {
   return (
     <div className="container mt-4">
       <h1>Welcome to the Home Page</h1>
+      <p className="text-muted">A quick snapshot of your projects and education, personalized once you sign in.</p>
       {error && <p className="text-danger">Error: {error}</p>}
 
       {/* Projects Section */}
